@@ -148,8 +148,8 @@ const Gameboard = (function () {
   })();
   
   
-  Gameboard.initBoard();
-  GameController.playGame();
+  // Gameboard.initBoard();
+  // GameController.playGame();
   
   
   
