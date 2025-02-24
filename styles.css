@@ -7,4 +7,13 @@
 .gameContainer {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.gameGrid {
+    margin-top: 100px;
+    display: grid;
+    grid-template-columns: repeat(3,minmax(100px,150px));
+    grid-template-rows: repeat(3,minmax(100px,150px));
 }
