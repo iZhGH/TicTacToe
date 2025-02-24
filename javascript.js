@@ -66,22 +66,31 @@ const Gameboard = (function () {
     let userTurn = 1;
     let userPosition;
     let maxTurns = 9;
+    let turns = 1;
     let winnerDetermined = false;
 
     const playGame = function () {
         messageBoard.textContent = `It's Player ${userTurn}'s Turn!`;
-        gridPosition.forEach((position) => position.addEventListener("click", (event) => {
+        gridPosition.forEach((position) => position.addEventListener("click", function place(event) {
+            let spotChosen = event.target;
+            if (turns == 9) {
+                gridPosition.forEach((position) => position.removeEventListener('click', place));
+                messageBoard.textContent = `Game has tied!`;
+                Gameboard.addPiece(spotChosen,userTurn);
+                return
+            }
+
+            if (winnerDetermined) {
+                messageBoard.textContent = `Congratulations, Player ${userTurn} has won!`
+                return
+            }
+            messageBoard.textContent = `It's Player ${userTurn}'s Turn!`;
             if ((event.target.textContent !== "X") && (event.target.textContent !== "O")) {
-                let spotChosen = event.target;
                 Gameboard.addPiece(spotChosen,userTurn);
                 GameController.checkWinner(userTurn);
-                if (winnerDetermined == true) {
-                console.log(`Congratulations, Player ${userTurn} has won!`);
-                i = 9;
-                }
                 (userTurn == 1) ? userTurn = 2 : userTurn = 1;
                 messageBoard.textContent = `It's Player ${userTurn}'s Turn!`;
-
+                turns++;
             }
          else {
             messageBoard.textContent = "Please select an empty spot!";
@@ -99,14 +108,39 @@ const Gameboard = (function () {
         ]
         
         let columns = [
-            [positionOne.textContent,positionTwo.textContent,positionThree.textContent],
-            [positionFour.textContent,positionFive.textContent,positionSix.textContent],
-            [positionSeven.textContent,positionEight.textContent,positionNine.textContent]
+            [positionOne.textContent,positionFour.textContent,positionSeven.textContent],
+            [positionTwo.textContent,positionFive.textContent,positionEight.textContent],
+            [positionThree.textContent,positionSix.textContent,positionNine.textContent]
+        ]
+
+        let diagonals = [
+            [positionOne.textContent,positionFive.textContent,positionNine.textContent],
+            [positionThree.textContent,positionFive.textContent,positionSeven.textContent]
         ]
 
         for (let row of rows) {
             if(row[0] !== "" && row[0] == row[1] && row[1] == row[2]) {
                 winnerDetermined = true;
+                messageBoard.textContent = `Congratulations, Player ${userTurn} has won!`;
+            gridPosition.forEach((position) => position.removeEventListener('click', place));
+                return 
+            }
+        }
+
+        for (let column of columns) {
+            if(column[0] !== "" && column[0] == column[1] && column[1] == column[2]) {
+                winnerDetermined = true;
+                messageBoard.textContent = `Congratulations, Player ${userTurn} has won!`;
+            gridPosition.forEach((position) => position.removeEventListener('click', place));
+                return 
+            }
+        }
+
+        for (let diagonal of diagonals) {
+            if(diagonal[0] !== "" && diagonal[0] == diagonal[1] && diagonal[1] == diagonal[2]) {
+                winnerDetermined = true;
+                messageBoard.textContent = `Congratulations, Player ${userTurn} has won!`;
+            gridPosition.forEach((position) => position.removeEventListener('click', place));
                 return 
             }
         }
