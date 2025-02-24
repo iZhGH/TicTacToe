@@ -1,7 +1,19 @@
+:root {
+
+    --mainBackgroundColor: linear-gradient(#120458,#7a04eb);
+    --gameBoardBackgroundColor: linear-gradient(#ff00a0,#ff124f);
+
+}
+
 * {
     box-sizing: border-box;
     padding: 0;
     margin: 0;
+}
+
+body {
+    height: 100vh;
+    background-color: black;
 }
 
 .gameContainer {
@@ -9,11 +21,25 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
 }
 
 .gameGrid {
+    box-shadow:
+    0 0 60px 10px #fff,  
+    0 0 100px 40px #f0f,
+    0 0 200px 60px #7a04eb;
     margin-top: 100px;
     display: grid;
-    grid-template-columns: repeat(3,minmax(100px,150px));
-    grid-template-rows: repeat(3,minmax(100px,150px));
+    gap: 3px;
+    grid-template-columns: repeat(3,minmax(100px,200px));
+    grid-template-rows: repeat(3,minmax(100px,200px));
+    border-radius: 5px;
+}
+
+button {
+    background-color: #492ae0;
+    border: none;
+    border-radius: 5px;
+
 }
