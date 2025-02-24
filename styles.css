@@ -64,5 +64,11 @@ button {
     background-color: #492ae0;
     border: none;
     border-radius: 5px;
+    cursor: pointer;
+
+}
+
+button:hover {
+    background-color: #100351;
 
 }

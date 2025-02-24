@@ -1,3 +1,13 @@
+const messageBoard = document.querySelector(".gameMessage");
+const gridPosition = document.querySelectorAll(".gridSpot");
+
+
+
+
+
+
+
+
 const Gameboard = (function () {
     let gameBoard = [];
   
@@ -25,13 +35,8 @@ const Gameboard = (function () {
         else {
             userPiece = Players.getPlayer2();
         }
-        for (let i = 0; i < gameBoard.length; i++) {
-            for (let j = 0; j < gameBoard.length; j++) {
-                if(gameBoard[i][j] == position) {
-                    gameBoard[i][j] = userPiece;
-                }
-            }
-        }
+        
+        position.textContent = userPiece;
         return
     };
   
@@ -56,7 +61,21 @@ const Gameboard = (function () {
       
       
       for(let i =0; i < maxTurns; i++) {
+        // UI BASED
+        messageBoard.textContent = `It's Player ${userTurn}'s Turn!`;
+        gridPosition.forEach((position) => position.addEventListener("click", () => {
+            let spotChosen = event.target;
+            Gameboard.addPiece(spotChosen,userTurn);
+            GameController.checkWinner(userTurn);
+            if (winnerDetermined == true) {
+            console.log(`Congratulations, Player ${userTurn} has won!`);
+            i = 9;
+            }
+            (userTurn == 1) ? userTurn = 2 : userTurn = 1;
 
+        }));
+
+        // CONSOLE-BASED
       userPosition = prompt("Enter a number to place your X/O on that corresponding position.") // TODO: Check if valid number
       userPosition = Number(userPosition);
       
@@ -149,7 +168,7 @@ const Gameboard = (function () {
   
   
   // Gameboard.initBoard();
-  // GameController.playGame();
+GameController.playGame();
   
   
   
