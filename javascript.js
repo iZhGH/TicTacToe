@@ -80,9 +80,23 @@ const Gameboard = (function () {
             }
         }
 
-        for (let column = 0; column <3; column++ ) { // Check rows for win condition
+        for (let column = 0; column <3; column++ ) { // Check columns for win condition
             if(checkMatch(Gameboard.getBoardPosition(0,column),Gameboard.getBoardPosition(1,column),Gameboard.getBoardPosition(2,column),userTurn)) {
                 winnerDetermined = true;
+            }
+        }
+
+        for (let row = 0; row < 1; row++ ) { // Check left-right diagonal for win condition
+            if(checkMatch(Gameboard.getBoardPosition(0,0),Gameboard.getBoardPosition(1,1),Gameboard.getBoardPosition(2,2),userTurn)) {
+                winnerDetermined = true;
+                row++
+            }
+        }
+
+        for (let row = 0; row < 1; row++ ) { // Check right-left diagonal for win condition
+            if(checkMatch(Gameboard.getBoardPosition(0,2),Gameboard.getBoardPosition(1,1),Gameboard.getBoardPosition(2,0),userTurn)) {
+                winnerDetermined = true;
+                row++
             }
         }
 
