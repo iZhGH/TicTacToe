@@ -9,6 +9,10 @@ const Gameboard = (function () {
       ];
     };
     
+    const getBoardPosition =  function (row, column) {
+        return gameBoard[row][column]
+    }
+
     const displayBoard = function() {
         console.log(gameBoard);
     }
@@ -36,7 +40,7 @@ const Gameboard = (function () {
     };
   
   
-    return { initBoard, addPiece, resetBoard, displayBoard };
+    return { initBoard, addPiece, resetBoard, displayBoard, getBoardPosition};
   })();
   
   
@@ -46,26 +50,53 @@ const Gameboard = (function () {
     let userTurn = 1;
     let userPosition;
     let maxTurns = 9;
-    let winnerDetermined;
+    let winnerDetermined = false;
 
     const playGame = function () {
       
       
       for(let i =0; i < maxTurns; i++) {
+
       userPosition = prompt("Enter a number to place your X/O on that corresponding position.") // TODO: Check if valid number
       userPosition = Number(userPosition);
       
       Gameboard.addPiece(userPosition, userTurn);
       Gameboard.displayBoard();
-      GameController.checkWinner();
+      GameController.checkWinner(userTurn);
+      if (winnerDetermined == true) {
+        i = 9;
+    }
       (userTurn == 1) ? userTurn = 2 : userTurn = 1;
       }
 
     };
     
-    const checkWinner = function () {
-        winnerDetermined = false;
+    const checkWinner = function (userTurn) {
+
+        for (let row = 0; row <3; row++ ) { // Check rows for win condition
+            if(checkMatch(Gameboard.getBoardPosition(row,0),Gameboard.getBoardPosition(row,1),Gameboard.getBoardPosition(row,2),userTurn)) {
+                winnerDetermined = true;
+            }
+        }
+
         
+    }
+
+    const checkMatch = function (one,two,three,turn) {
+        let userPieceAgain;
+
+        if (turn == 1) {
+            userPieceAgain = Players.getPlayer1();
+        }
+        else {
+            userPieceAgain = Players.getPlayer2();
+        }
+        if ((one == userPieceAgain) && (two == userPieceAgain) && (three == userPieceAgain)) {
+            return true
+        }
+        else {
+            return false
+        }
     }
   
   
