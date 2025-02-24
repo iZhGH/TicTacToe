@@ -64,6 +64,7 @@ const Gameboard = (function () {
       Gameboard.displayBoard();
       GameController.checkWinner(userTurn);
       if (winnerDetermined == true) {
+        console.log(`Congratulations, Player ${userTurn} has won!`);
         i = 9;
     }
       (userTurn == 1) ? userTurn = 2 : userTurn = 1;
@@ -75,6 +76,12 @@ const Gameboard = (function () {
 
         for (let row = 0; row <3; row++ ) { // Check rows for win condition
             if(checkMatch(Gameboard.getBoardPosition(row,0),Gameboard.getBoardPosition(row,1),Gameboard.getBoardPosition(row,2),userTurn)) {
+                winnerDetermined = true;
+            }
+        }
+
+        for (let column = 0; column <3; column++ ) { // Check rows for win condition
+            if(checkMatch(Gameboard.getBoardPosition(0,column),Gameboard.getBoardPosition(1,column),Gameboard.getBoardPosition(2,column),userTurn)) {
                 winnerDetermined = true;
             }
         }
@@ -128,7 +135,6 @@ const Gameboard = (function () {
   
   
   Gameboard.initBoard();
-  Gameboard.displayBoard();
   GameController.playGame();
   
   
