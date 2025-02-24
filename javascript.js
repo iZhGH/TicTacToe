@@ -12,32 +12,8 @@ const positionEight = document.querySelector(".eight");
 const positionNine = document.querySelector(".nine");
 
 
-
-
-
-
-
-
-
 const Gameboard = (function () {
-    let gameBoard = [];
   
-    const initBoard = function () {
-      gameBoard = [
-        [1, 2, 3],
-        [4, 5, 6],
-        [7, 8, 9],
-      ];
-    };
-    
-    const getBoardPosition =  function (row, column) {
-        return gameBoard[row][column]
-    }
-
-    const displayBoard = function() {
-        console.log(gameBoard);
-    }
-   
     const addPiece = function (position, userTurn) {
         let userPiece;
         if (userTurn == 1) {
@@ -51,21 +27,15 @@ const Gameboard = (function () {
         return
     };
   
-    const resetBoard = function () {
-        gameBoard = [[1,2,3],[4,5,6],[7,8,9]];
-    };
+
   
-  
-    return { initBoard, addPiece, resetBoard, displayBoard, getBoardPosition};
+    return {addPiece};
   })();
   
   
 
-
   const GameController = (function () {
     let userTurn = 1;
-    let userPosition;
-    let maxTurns = 9;
     let turns = 1;
     let winnerDetermined = false;
 
@@ -145,42 +115,10 @@ const Gameboard = (function () {
             }
         }
         
-
-    
-
-
-
        
-        
     }
 
-    const checkMatch = function (one,two,three,turn) {
-        let userPieceAgain;
 
-        if (turn == 1) {
-            userPieceAgain = Players.getPlayer1();
-        }
-        else {
-            userPieceAgain = Players.getPlayer2();
-        }
-        if ((one == userPieceAgain) && (two == userPieceAgain) && (three == userPieceAgain)) {
-            return true
-        }
-        else {
-            return false
-        }
-    }
-  
-  
-    const checkTurn = function () {
-      if (userTurn == 1) {
-        return "Player 1's turn (X's)!";
-      }
-      else {
-        return "Player 2's turn (O's)!"
-      }
-    };
-  
   
     return { playGame, checkWinner};
   })();
@@ -198,12 +136,10 @@ const Gameboard = (function () {
     return { getPlayer1, getPlayer2 };
   })();
   
-  
-  // Gameboard.initBoard();
-GameController.playGame();
+
   
   
-  
+  GameController.playGame();
   
   
   
