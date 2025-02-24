@@ -1,7 +1,6 @@
 const Gameboard = (function () {
     let gameBoard = [];
   
-  
     const initBoard = function () {
       gameBoard = [
         [1, 2, 3],
@@ -13,8 +12,7 @@ const Gameboard = (function () {
     const displayBoard = function() {
         console.log(gameBoard);
     }
-  
-  
+   
     const addPiece = function (position, userTurn) {
         let userPiece;
         if (userTurn == 1) {
@@ -33,7 +31,6 @@ const Gameboard = (function () {
         return
     };
   
-  
     const resetBoard = function () {
         gameBoard = [[1,2,3],[4,5,6],[7,8,9]];
     };
@@ -43,16 +40,18 @@ const Gameboard = (function () {
   })();
   
   
+
+
   const GameController = (function () {
     let userTurn = 1;
     let userPosition;
-    
-  
-  
+    let maxTurns = 9;
+    let winnerDetermined;
+
     const playGame = function () {
       
-      console.log(checkTurn());
       
+      for(let i =0; i < maxTurns; i++) {
       userPosition = prompt("Enter a number to place your X/O on that corresponding position.") // TODO: Check if valid number
       userPosition = Number(userPosition);
       
@@ -60,9 +59,12 @@ const Gameboard = (function () {
       Gameboard.displayBoard();
       GameController.checkWinner();
       (userTurn == 1) ? userTurn = 2 : userTurn = 1;
+      }
+
     };
     
     const checkWinner = function () {
+        winnerDetermined = false;
         
     }
   
@@ -79,6 +81,8 @@ const Gameboard = (function () {
   
     return { playGame, checkWinner};
   })();
+
+
   
   
   const Players = (function () {
