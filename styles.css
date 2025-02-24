@@ -1,14 +1,11 @@
-:root {
-
-    --mainBackgroundColor: linear-gradient(#120458,#7a04eb);
-    --gameBoardBackgroundColor: linear-gradient(#ff00a0,#ff124f);
-
-}
 
 * {
     box-sizing: border-box;
     padding: 0;
     margin: 0;
+    font-family: "Viga", serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
 body {
@@ -24,17 +21,43 @@ body {
 
 }
 
+
+
+
+.gameTitle {
+    color: white;
+    font-size: 50px;
+    letter-spacing: 3px;
+}
+.gameMessageDiv {
+    margin-top: 10px;
+    background-color:  orange;
+    border-radius: 3px;
+    border: solid white;
+}
+.gameMessage {
+    color: black;
+    text-align: center;
+    font-size: 20px;
+}
+
 .gameGrid {
     box-shadow:
     0 0 60px 10px #fff,  
-    0 0 100px 40px #f0f,
-    0 0 200px 60px #7a04eb;
-    margin-top: 100px;
+    0 0 100px 10px #f0f,
+    0 0 200px 15px #7a04eb;
+    margin-top: 75px;
     display: grid;
     gap: 3px;
     grid-template-columns: repeat(3,minmax(100px,200px));
     grid-template-rows: repeat(3,minmax(100px,200px));
     border-radius: 5px;
+}
+
+.gridSpot {
+    color: white;
+    font-size: 150px;
+    text-shadow: 1px 1px 5px red;
 }
 
 button {
