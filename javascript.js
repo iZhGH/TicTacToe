@@ -1,6 +1,17 @@
 const messageBoard = document.querySelector(".gameMessage");
 const gridPosition = document.querySelectorAll(".gridSpot");
 
+const positionOne = document.querySelector(".one");
+const positionTwo = document.querySelector(".two");
+const positionThree = document.querySelector(".three");
+const positionFour = document.querySelector(".four");
+const positionFive = document.querySelector(".five");
+const positionSix = document.querySelector(".six");
+const positionSeven = document.querySelector(".seven");
+const positionEight = document.querySelector(".eight");
+const positionNine = document.querySelector(".nine");
+
+
 
 
 
@@ -59,7 +70,7 @@ const Gameboard = (function () {
 
     const playGame = function () {
         messageBoard.textContent = `It's Player ${userTurn}'s Turn!`;
-        gridPosition.forEach((position) => position.addEventListener("click", () => {
+        gridPosition.forEach((position) => position.addEventListener("click", (event) => {
             if ((event.target.textContent !== "X") && (event.target.textContent !== "O")) {
                 let spotChosen = event.target;
                 Gameboard.addPiece(spotChosen,userTurn);
@@ -81,6 +92,27 @@ const Gameboard = (function () {
     };
     
     const checkWinner = function (userTurn) {
+        let rows = [
+            [positionOne.textContent,positionTwo.textContent,positionThree.textContent],
+            [positionFour.textContent,positionFive.textContent,positionSix.textContent],
+            [positionSeven.textContent,positionEight.textContent,positionNine.textContent]
+        ]
+        
+        let columns = [
+            [positionOne.textContent,positionTwo.textContent,positionThree.textContent],
+            [positionFour.textContent,positionFive.textContent,positionSix.textContent],
+            [positionSeven.textContent,positionEight.textContent,positionNine.textContent]
+        ]
+
+        for (let row of rows) {
+            if(row[0] !== "" && row[0] == row[1] && row[1] == row[2]) {
+                winnerDetermined = true;
+                return 
+            }
+        }
+        
+
+    
 
 
 
