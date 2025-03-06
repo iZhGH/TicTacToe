@@ -1,3 +1,5 @@
+// DOM GRABBING
+
 const messageBoard = document.querySelector(".gameMessage");
 const gridPosition = document.querySelectorAll(".gridSpot");
 
@@ -12,6 +14,7 @@ const positionEight = document.querySelector(".eight");
 const positionNine = document.querySelector(".nine");
 
 
+// MODULE PATTERN 
 const Gameboard = (function () {
   
     const addPiece = function (position, userTurn) {
@@ -40,13 +43,14 @@ const Gameboard = (function () {
     let winnerDetermined = false;
 
     const playGame = function () {
+
         messageBoard.textContent = `It's Player ${userTurn}'s Turn!`;
+
         gridPosition.forEach((position) => position.addEventListener("click", function place(event) {
             let spotChosen = event.target;
-            if (turns == 9) {
+            if (turns == 9) { // Max possible turns before board is full
                 gridPosition.forEach((position) => position.removeEventListener('click', place));
                 messageBoard.textContent = `Game has tied!`;
-                Gameboard.addPiece(spotChosen,userTurn);
                 return
             }
 
@@ -55,7 +59,7 @@ const Gameboard = (function () {
                 return
             }
             messageBoard.textContent = `It's Player ${userTurn}'s Turn!`;
-            if ((event.target.textContent !== "X") && (event.target.textContent !== "O")) {
+            if ((event.target.textContent !== "X") && (event.target.textContent !== "O")) { // If grid spot is already taken
                 Gameboard.addPiece(spotChosen,userTurn);
                 GameController.checkWinner(userTurn);
                 (userTurn == 1) ? userTurn = 2 : userTurn = 1;
@@ -97,6 +101,8 @@ const Gameboard = (function () {
             }
         }
 
+        // Check each row/column/diagonal for all 3 pieces
+
         for (let column of columns) {
             if(column[0] !== "" && column[0] == column[1] && column[1] == column[2]) {
                 winnerDetermined = true;
@@ -123,8 +129,6 @@ const Gameboard = (function () {
     return { playGame, checkWinner};
   })();
 
-
-  
   
   const Players = (function () {
     let Player1 = { piece: "X" };
@@ -138,7 +142,7 @@ const Gameboard = (function () {
   
 
   
-  
+  // Main
   GameController.playGame();
   
   
