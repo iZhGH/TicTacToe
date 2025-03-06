@@ -51,6 +51,7 @@ const Gameboard = (function () {
             if (turns == 9) { // Max possible turns before board is full
                 gridPosition.forEach((position) => position.removeEventListener('click', place));
                 messageBoard.textContent = `Game has tied!`;
+                Gameboard.addPiece(spotChosen,userTurn);
                 return
             }
 
